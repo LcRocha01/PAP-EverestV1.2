@@ -1,16 +1,10 @@
 <?php
-session_start();
+include '../includes/auth_logistica.php';
 include '../config/db.php';
-
-// Verificar se é logística
-if (empty($_SESSION['user_id']) || $_SESSION['user_tipo'] !== 'logistica') {
-    header("Location: ../login.php");
-    exit;
-}
 
 // Buscar entidades pendentes
 $stmt = $conn->prepare("
-    SELECT id, nome, email, created_at 
+    SELECT id, nome, email, criado_em 
     FROM usuarios 
     WHERE tipo = 'entidade' AND aprovado = 0
     ORDER BY id DESC
@@ -23,48 +17,55 @@ $result = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <title>Clientes Pendentes</title>
-    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard_log.css">
 </head>
 <body>
 
-<?php include '../includes/header.php'; ?>
+<div class="layout">
+    <?php include 'sidebar.php'; ?>
 
-<div class="dashboard-container">
+    <main class="content">
+        <header class="topbar">
+            <h1>Clientes Pendentes</h1>
+            <div class="user-info">👤 <?php echo htmlspecialchars($_SESSION['user_nome']); ?></div>
+        </header>
 
-    <h2>Clientes Pendentes de Aprovação</h2>
+        <section class="table-wrapper">
+            <h2>Clientes Pendentes de Aprovação</h2>
 
-    <?php if ($result->num_rows === 0): ?>
-        <p>Não existem clientes pendentes.</p>
-    <?php else: ?>
+            <?php if ($result->num_rows === 0): ?>
+                <p>Não existem clientes pendentes.</p>
+            <?php else: ?>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Data Registo</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Data Registo</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-            <?php while ($user = $result->fetch_assoc()): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($user['nome']); ?></td>
-                    <td><?php echo htmlspecialchars($user['email']); ?></td>
-                    <td><?php echo $user['created_at'] ?? '-'; ?></td>
-                    <td>
-                        <a href="aprovar_cliente.php?id=<?php echo $user['id']; ?>" class="btn-approve">Aprovar</a>
-                        <a href="rejeitar_cliente.php?id=<?php echo $user['id']; ?>" class="btn-reject">Rejeitar</a>
-                    </td>
-                </tr>
-            <?php endwhile; ?>
+                    <?php while ($user = $result->fetch_assoc()): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($user['nome']); ?></td>
+                            <td><?php echo htmlspecialchars($user['email']); ?></td>
+                            <td><?php echo htmlspecialchars($user['criado_em'] ?? '-'); ?></td>
+                            <td>
+                                <a href="aprovar_cliente.php?id=<?php echo urlencode($user['id']); ?>" class="btn link">Aprovar</a>
+                                <a href="rejeitar_cliente.php?id=<?php echo urlencode($user['id']); ?>" class="btn link">Rejeitar</a>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
 
-            </tbody>
-        </table>
+                    </tbody>
+                </table>
 
-    <?php endif; ?>
-
+            <?php endif; ?>
+        </section>
+    </main>
 </div>
 
 </body>
