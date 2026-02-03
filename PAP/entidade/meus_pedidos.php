@@ -19,7 +19,7 @@ $pedidos = $stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <title>Meus Pedidos</title>
-    <link rel="stylesheet" href="../css/pedidos.css">
+    <link rel="stylesheet" href="../assets/css/pedidos.css">
 </head>
 <body>
 

@@ -25,7 +25,7 @@ $margem_padrao = $margem->num_rows ? $margem->fetch_assoc()['margem_percentual']
 <head>
     <meta charset="UTF-8">
     <title>Definir Preços</title>
-    <link rel="stylesheet" href="../css/pedidos.css">
+    <link rel="stylesheet" href="../assets/css/pedidos.css">
 </head>
 <body>
 
