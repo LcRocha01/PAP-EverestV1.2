@@ -8,7 +8,7 @@ $dbname = "logistica_pap";
 
 try {
     $conn = new mysqli($host, $user, $pass, $dbname);
-    $conn->set_charset("utf8");
+    $conn->set_charset("utf8mb4");
 } catch (mysqli_sql_exception $e) {
     die("Erro na ligação à BD.");
 }

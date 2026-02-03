@@ -1,6 +1,5 @@
 <?php
 include '../includes/auth_entidade.php';
-session_start();
 include '../config/db.php';
 
 if (empty($_SESSION['user_id']) || $_SESSION['user_tipo'] !== 'entidade') {
@@ -26,12 +25,12 @@ if ((int)$user['aprovado'] !== 1) {
 <head>
     <meta charset="UTF-8">
     <title>Dashboard - Entidade</title>
-    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard_log.css">
 </head>
 <body>
 
 <h1>Área da Entidade</h1>
-<p>Bem-vindo, <?php echo $_SESSION['user_nome']; ?> 👋</p>
+<p>Bem-vindo, <?php echo htmlspecialchars($_SESSION['user_nome']); ?> 👋</p>
 
 <ul>
     <li><a href="novo_pedido.php">Novo Pedido</a></li>
