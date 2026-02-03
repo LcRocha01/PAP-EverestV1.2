@@ -1,0 +1,191 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+body {
+    background: #f8fafc;
+    color: #020617;
+}
+
+/* LAYOUT */
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 260px;
+    background: #0f172a;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-logo {
+    padding: 25px;
+    border-bottom: 1px solid #1e293b;
+}
+
+.sidebar-logo h2 {
+    color: #38bdf8;
+    margin-bottom: 5px;
+}
+
+.sidebar-logo span {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 8px;
+}
+
+.menu a {
+    padding: 12px 15px;
+    border-radius: 8px;
+    color: #e5e7eb;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.menu a:hover {
+    background: #1e293b;
+    color: #38bdf8;
+}
+
+.menu a.active {
+    background: #2563eb;
+    color: white;
+}
+
+.menu a.logout {
+    margin-top: 20px;
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+}
+
+.menu a.logout:hover {
+    background: rgba(239, 68, 68, 0.25);
+}
+
+/* CONTEÚDO */
+.content {
+    flex: 1;
+    padding: 30px;
+}
+
+/* TOPBAR */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.topbar h1 {
+    font-size: 1.8rem;
+}
+
+.user-info {
+    background: white;
+    padding: 10px 18px;
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+}
+
+/* WELCOME */
+.welcome {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 30px;
+}
+
+.welcome h2 {
+    color: #2563eb;
+    margin-bottom: 10px;
+}
+
+.welcome p {
+    color: #475569;
+}
+
+/* CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(37,99,235,0.15);
+}
+
+.card h3 {
+    color: #475569;
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.card .numero {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+/* TOPBAR RIGHT */
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* NOTIFICAÇÕES */
+.notificacao {
+    position: relative;
+    cursor: pointer;
+    font-size: 1.4rem;
+}
+
+.notificacao .sino {
+    transition: color 0.2s ease;
+}
+
+.notificacao:hover .sino {
+    color: #2563eb;
+}
+
+/* BADGE VERMELHO */
+.badge {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    background: #ef4444;
+    color: white;
+    font-size: 0.7rem;
+    padding: 3px 7px;
+    border-radius: 50%;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}

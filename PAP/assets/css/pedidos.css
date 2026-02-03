@@ -1,0 +1,130 @@
+/* RESET BÁSICO */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* FUNDO */
+body {
+    background: #0f172a; /* azul escuro tecnológico */
+    color: #e5e7eb;
+    padding: 40px;
+}
+
+/* TÍTULOS */
+h2 {
+    margin-bottom: 20px;
+    color: #38bdf8;
+}
+
+/* FORMULÁRIO */
+form {
+    background: #020617;
+    padding: 25px;
+    border-radius: 8px;
+    max-width: 900px;
+}
+
+/* TABELA */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th {
+    background: #020617;
+    color: #38bdf8;
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #1e293b;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #1e293b;
+}
+
+/* INPUT */
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    background: #020617;
+    border: 1px solid #1e293b;
+    color: #e5e7eb;
+    border-radius: 4px;
+}
+
+/* BOTÃO */
+button {
+    background: #38bdf8;
+    color: #020617;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #0ea5e9;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+body {
+    background: #0f172a;
+    color: #e5e7eb;
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #020617, #0f172a);
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    color: #38bdf8;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin-bottom: 30px;
+    color: #cbd5f5;
+}
+
+.btn {
+    background: #38bdf8;
+    color: #020617;
+    padding: 14px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: #0ea5e9;
+}
+
+.info {
+    padding: 60px;
+    text-align: center;
+}
+
+.info h2 {
+    color: #38bdf8;
+    margin-bottom: 15px;
+}
