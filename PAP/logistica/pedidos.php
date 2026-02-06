@@ -58,6 +58,9 @@ $pedidos = $conn->query("
                                     <a class="btn link" href="definir_precos.php?pedido_id=<?php echo urlencode($p['id']); ?>">
                                         Analisar
                                     </a>
+                                    <a class="btn link" href="aprovar_pedido.php?id=<?php echo urlencode($p['id']); ?>">
+                                        Aprovar
+                                    </a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>

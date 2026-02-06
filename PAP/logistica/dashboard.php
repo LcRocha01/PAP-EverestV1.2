@@ -1,5 +1,16 @@
 <?php
 include '../includes/auth_logistica.php';
+include '../config/db.php';
+
+$stmt = $conn->prepare("
+    SELECT COUNT(*) AS total
+    FROM notificacoes
+    WHERE id_logistica = ? AND lida = 0
+");
+$stmt->bind_param("i", $_SESSION['user_id']);
+$stmt->execute();
+$notificacoes = $stmt->get_result()->fetch_assoc();
+$total_notificacoes = (int)($notificacoes['total'] ?? 0);
 ?>
 
 <!DOCTYPE html>
@@ -25,10 +36,12 @@ include '../includes/auth_logistica.php';
             <div class="topbar-right">
 
                 <!-- NOTIFICAÇÕES -->
-                <div class="notificacao">
+                <a class="notificacao" href="notificacoes.php" aria-label="Ver notificações">
                     <span class="sino">🔔</span>
-                    <span class="badge">0</span> <!-- depois ligamos à BD -->
-                </div>
+                    <?php if ($total_notificacoes > 0): ?>
+                        <span class="badge"><?php echo htmlspecialchars((string)$total_notificacoes); ?></span>
+                    <?php endif; ?>
+                </a>
 
                 <!-- UTILIZADOR -->
                 <div class="user-info">

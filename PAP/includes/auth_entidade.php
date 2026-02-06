@@ -20,6 +20,11 @@ $stmt->execute();
 $result = $stmt->get_result();
 $entidade = $result->fetch_assoc();
 
+if (!$entidade) {
+    header("Location: ../login.php");
+    exit;
+}
+
 // Se ainda estiver pendente
 if ($entidade['estado'] == 'pendente') {
     header("Location: aguarda_aprovacao.php");

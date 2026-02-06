@@ -6,6 +6,7 @@ $menu = [
     'clientes.php' => '🏪 Clientes',
     'produtos.php' => '🥕 Produtos',
     'margem.php' => '💰 Margem Padrão',
+    'notificacoes.php' => '🔔 Notificações',
     'relatorios.php' => '📊 Relatórios',
     'perfil.php' => '👤 Meu Perfil',
 ];
