@@ -1,5 +1,16 @@
 <?php
 include '../includes/auth_logistica.php';
+include '../config/db.php';
+
+$stmt = $conn->prepare("
+    SELECT COUNT(*) AS total
+    FROM notificacoes
+    WHERE id_logistica = ? AND lida = 0
+");
+$stmt->bind_param("i", $_SESSION['user_id']);
+$stmt->execute();
+$notificacoes = $stmt->get_result()->fetch_assoc();
+$total_notificacoes = (int)($notificacoes['total'] ?? 0);
 ?>
 
 <!DOCTYPE html>
@@ -14,26 +25,7 @@ include '../includes/auth_logistica.php';
 <div class="layout">
 
     <!-- SIDEBAR -->
-    <aside class="sidebar">
-        <div class="sidebar-logo">
-            <!-- depois ligamos à tua logo real -->
-            <h2>LOGISTICA</h2>
-            <span>Painel Administrativo</span>
-        </div>
-
-        <nav class="menu">
-            <a href="dashboard.php" class="active">🏠 Dashboard</a>
-            <a href="pedidos.php">📦 Pedidos</a>
-            <a href="clientes.php">🏪 Clientes</a>
-            <a href="produtos.php">🥕 Produtos</a>
-            <a href="margem.php">💰 Margem Padrão</a>
-            <a href="relatorios.php">📊 Relatórios</a>
-            <a href="perfil.php">👤 Meu Perfil</a>
-            <a href="../logout.php" class="logout">🚪 Logout</a>
-        </nav>
-
-
-    </aside>
+    <?php include 'sidebar.php'; ?>
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="content">
@@ -44,14 +36,16 @@ include '../includes/auth_logistica.php';
             <div class="topbar-right">
 
                 <!-- NOTIFICAÇÕES -->
-                <div class="notificacao">
+                <a class="notificacao" href="notificacoes.php" aria-label="Ver notificações">
                     <span class="sino">🔔</span>
-                    <span class="badge">0</span> <!-- depois ligamos à BD -->
-                </div>
+                    <?php if ($total_notificacoes > 0): ?>
+                        <span class="badge"><?php echo htmlspecialchars((string)$total_notificacoes); ?></span>
+                    <?php endif; ?>
+                </a>
 
                 <!-- UTILIZADOR -->
                 <div class="user-info">
-                    👤 <?php echo $_SESSION['user_nome']; ?>
+                    👤 <?php echo htmlspecialchars($_SESSION['user_nome']); ?>
                 </div>
 
             </div>

@@ -2,7 +2,8 @@
 session_start();
 include '../config/db.php';
 
-if (empty($_SESSION['user'])) {
+$role = $_SESSION['user_role'] ?? $_SESSION['user_tipo'] ?? null;
+if (empty($_SESSION['user_id']) || $role !== 'entidade') {
     header("Location: ../login.php");
     exit;
 }
@@ -18,6 +19,11 @@ $stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result();
 $entidade = $result->fetch_assoc();
+
+if (!$entidade) {
+    header("Location: ../login.php");
+    exit;
+}
 
 // Se ainda estiver pendente
 if ($entidade['estado'] == 'pendente') {

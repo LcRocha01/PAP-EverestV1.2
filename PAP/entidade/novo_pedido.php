@@ -28,40 +28,63 @@ $produtos = $conn->query("
 <head>
     <meta charset="UTF-8">
     <title>Novo Pedido</title>
-    <link rel="stylesheet" href="../css/pedidos.css">
+    <link rel="stylesheet" href="../assets/css/dashboard_log.css">
 </head>
 <body>
 
-<h2>Novo Pedido</h2>
+<div class="layout">
+    <?php include 'sidebar.php'; ?>
 
-<form method="post" action="processar_pedido.php">
+    <main class="content">
+        <header class="topbar">
+            <h1>Novo Pedido</h1>
+            <div class="user-info">👤 <?php echo htmlspecialchars($_SESSION['user_nome']); ?></div>
+        </header>
 
-<table>
-    <tr>
-        <th>Produto</th>
-        <th>Unidade</th>
-        <th>Quantidade</th>
-    </tr>
+        <section class="welcome">
+            <p>Seleciona os produtos e as quantidades para criares um novo pedido.</p>
+        </section>
 
-    <?php while ($p = $produtos->fetch_assoc()): ?>
-    <tr>
-        <td><?php echo $p['nome']; ?></td>
-        <td><?php echo $p['unidade']; ?></td>
-        <td>
-            <input 
-                type="number" 
-                name="quantidade[<?php echo $p['id']; ?>]" 
-                step="0.01" 
-                min="0"
-            >
-        </td>
-    </tr>
-    <?php endwhile; ?>
-</table>
+        <section class="table-wrapper">
+            <?php if (!empty($_SESSION['erro_pedido'])): ?>
+                <div class="alert error"><?php echo htmlspecialchars($_SESSION['erro_pedido']); ?></div>
+                <?php unset($_SESSION['erro_pedido']); ?>
+            <?php endif; ?>
 
-<button type="submit">Enviar Pedido</button>
+            <form method="post" action="processar_pedido.php">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Unidade</th>
+                            <th>Quantidade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($p = $produtos->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($p['nome']); ?></td>
+                                <td><?php echo htmlspecialchars($p['unidade']); ?></td>
+                                <td>
+                                    <input
+                                        type="number"
+                                        name="quantidade[<?php echo (int)$p['id']; ?>]"
+                                        step="0.01"
+                                        min="0"
+                                    >
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
 
-</form>
+                <div style="margin-top: 16px;">
+                    <button class="btn primary" type="submit">Enviar Pedido</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</div>
 
 </body>
 </html>

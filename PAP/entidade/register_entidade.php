@@ -30,8 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Criar utilizador (role FIXO no servidor)
         $stmt = $conn->prepare("
-            INSERT INTO usuarios (nome, email, senha, role) 
-            VALUES (?, ?, ?, 'entidade')
+            INSERT INTO usuarios (nome, email, senha, role, tipo) 
+            VALUES (?, ?, ?, 'entidade', 'entidade')
         ");
         $stmt->bind_param("sss", $nome, $email, $senha);
         $stmt->execute();
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Registo de Entidade</title>
-    <link rel="stylesheet" href="../css/register.css">
+    <link rel="stylesheet" href="../assets/css/login.css">
 </head>
 <body>
 
