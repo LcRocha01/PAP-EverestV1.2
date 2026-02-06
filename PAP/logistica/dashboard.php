@@ -14,26 +14,7 @@ include '../includes/auth_logistica.php';
 <div class="layout">
 
     <!-- SIDEBAR -->
-    <aside class="sidebar">
-        <div class="sidebar-logo">
-            <!-- depois ligamos à tua logo real -->
-            <h2>LOGISTICA</h2>
-            <span>Painel Administrativo</span>
-        </div>
-
-        <nav class="menu">
-            <a href="dashboard.php" class="active">🏠 Dashboard</a>
-            <a href="pedidos.php">📦 Pedidos</a>
-            <a href="clientes.php">🏪 Clientes</a>
-            <a href="produtos.php">🥕 Produtos</a>
-            <a href="margem.php">💰 Margem Padrão</a>
-            <a href="relatorios.php">📊 Relatórios</a>
-            <a href="perfil.php">👤 Meu Perfil</a>
-            <a href="../logout.php" class="logout">🚪 Logout</a>
-        </nav>
-
-
-    </aside>
+    <?php include 'sidebar.php'; ?>
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="content">
@@ -51,7 +32,7 @@ include '../includes/auth_logistica.php';
 
                 <!-- UTILIZADOR -->
                 <div class="user-info">
-                    👤 <?php echo $_SESSION['user_nome']; ?>
+                    👤 <?php echo htmlspecialchars($_SESSION['user_nome']); ?>
                 </div>
 
             </div>

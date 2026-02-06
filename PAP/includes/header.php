@@ -13,7 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <?php if (isset($_SESSION['user_id'])): ?>
     <nav>
         <ul>
-            <?php if ($_SESSION['user_tipo'] === 'logistica'): ?>
+            <?php if (($_SESSION['user_role'] ?? $_SESSION['user_tipo']) === 'logistica'): ?>
                 <li><a href="../logistica/dashboard.php">Dashboard</a></li>
                 <li><a href="../logistica/pedidos.php">Pedidos</a></li>
             <?php else: ?>

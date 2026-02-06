@@ -1,9 +1,9 @@
 <?php
 include '../includes/auth_entidade.php';
-session_start();
 include '../config/db.php';
 
-if (empty($_SESSION['user_id']) || $_SESSION['user_tipo'] !== 'entidade') {
+$role = $_SESSION['user_role'] ?? $_SESSION['user_tipo'] ?? null;
+if (empty($_SESSION['user_id']) || $role !== 'entidade') {
     header("Location: ../login.php");
     exit;
 }
@@ -26,18 +26,44 @@ if ((int)$user['aprovado'] !== 1) {
 <head>
     <meta charset="UTF-8">
     <title>Dashboard - Entidade</title>
-    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard_log.css">
 </head>
 <body>
 
-<h1>Área da Entidade</h1>
-<p>Bem-vindo, <?php echo $_SESSION['user_nome']; ?> 👋</p>
+<div class="layout">
+    <?php include 'sidebar.php'; ?>
 
-<ul>
-    <li><a href="novo_pedido.php">Novo Pedido</a></li>
-    <li><a href="meus_pedidos.php">Meus Pedidos</a></li>
-    <li><a href="../logout.php">Logout</a></li>
-</ul>
+    <main class="content">
+        <header class="topbar">
+            <h1>Dashboard</h1>
+            <div class="user-info">👤 <?php echo htmlspecialchars($_SESSION['user_nome']); ?></div>
+        </header>
+
+        <section class="welcome">
+            <h2>Bem-vindo à área da entidade</h2>
+            <p>Aqui podes criar pedidos, acompanhar estados e gerir a ligação com a logística.</p>
+        </section>
+
+        <section class="cards">
+            <div class="card">
+                <h3>Novo Pedido</h3>
+                <span class="numero">+</span>
+            </div>
+            <div class="card">
+                <h3>Meus Pedidos</h3>
+                <span class="numero">📦</span>
+            </div>
+            <div class="card">
+                <h3>Perfil</h3>
+                <span class="numero">👤</span>
+            </div>
+            <div class="card">
+                <h3>Associar Logística</h3>
+                <span class="numero">🔗</span>
+            </div>
+        </section>
+    </main>
+</div>
 
 </body>
 </html>

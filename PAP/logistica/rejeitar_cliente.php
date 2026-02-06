@@ -3,7 +3,8 @@ session_start();
 include '../config/db.php';
 
 // Só logística
-if (empty($_SESSION['user_id']) || $_SESSION['user_tipo'] !== 'logistica') {
+$role = $_SESSION['user_role'] ?? $_SESSION['user_tipo'] ?? null;
+if (empty($_SESSION['user_id']) || $role !== 'logistica') {
     header("Location: ../login.php");
     exit;
 }
