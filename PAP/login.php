@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Buscar utilizador
         $stmt = $conn->prepare("
-            SELECT id, nome, email, senha, tipo, ativo, aprovado 
+            SELECT id, nome, email, senha, tipo, role, ativo, aprovado 
             FROM usuarios 
             WHERE email = ?
             LIMIT 1
@@ -45,12 +45,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Login válido → proteger sessão
                 session_regenerate_id(true);
 
+                $role = $user['role'] ?: $user['tipo'];
+                if ($role === 'admin') {
+                    $role = 'logistica';
+                }
+
                 $_SESSION['user_id']   = $user['id'];
                 $_SESSION['user_nome'] = $user['nome'];
-                $_SESSION['user_tipo'] = $user['tipo'];
+                $_SESSION['user_tipo'] = $role;
+                $_SESSION['user_role'] = $role;
 
                 // Redirecionar conforme tipo
-                if ($user['tipo'] === 'logistica') {
+                if ($role === 'logistica') {
                     header("Location: logistica/dashboard.php");
                 } else {
                     header("Location: entidade/dashboard.php");

@@ -28,6 +28,61 @@ $produtos = $conn->query("
 <head>
     <meta charset="UTF-8">
     <title>Novo Pedido</title>
+    <link rel="stylesheet" href="../assets/css/dashboard_log.css">
+</head>
+<body>
+
+<div class="layout">
+    <?php include 'sidebar.php'; ?>
+
+    <main class="content">
+        <header class="topbar">
+            <h1>Novo Pedido</h1>
+            <div class="user-info">👤 <?php echo htmlspecialchars($_SESSION['user_nome']); ?></div>
+        </header>
+
+        <section class="welcome">
+            <p>Seleciona os produtos e as quantidades para criares um novo pedido.</p>
+        </section>
+
+        <section class="table-wrapper">
+            <form method="post" action="processar_pedido.php">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Unidade</th>
+                            <th>Quantidade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($p = $produtos->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($p['nome']); ?></td>
+                                <td><?php echo htmlspecialchars($p['unidade']); ?></td>
+                                <td>
+                                    <input
+                                        type="number"
+                                        name="quantidade[<?php echo (int)$p['id']; ?>]"
+                                        step="0.01"
+                                        min="0"
+                                    >
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+
+                <div style="margin-top: 16px;">
+                    <button class="btn primary" type="submit">Enviar Pedido</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</div>
+
+</body>
+</html>
     <link rel="stylesheet" href="../assets/css/pedidos.css">
 </head>
 <body>

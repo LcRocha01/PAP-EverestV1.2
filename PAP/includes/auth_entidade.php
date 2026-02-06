@@ -2,7 +2,8 @@
 session_start();
 include '../config/db.php';
 
-if (empty($_SESSION['user'])) {
+$role = $_SESSION['user_role'] ?? $_SESSION['user_tipo'] ?? null;
+if (empty($_SESSION['user_id']) || $role !== 'entidade') {
     header("Location: ../login.php");
     exit;
 }
