@@ -67,3 +67,23 @@ if ((int)$user['aprovado'] !== 1) {
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Entidade</title>
+    <link rel="stylesheet" href="../assets/css/dashboard_log.css">
+</head>
+<body>
+
+<h1>Área da Entidade</h1>
+<p>Bem-vindo, <?php echo htmlspecialchars($_SESSION['user_nome']); ?> 👋</p>
+
+<ul>
+    <li><a href="novo_pedido.php">Novo Pedido</a></li>
+    <li><a href="meus_pedidos.php">Meus Pedidos</a></li>
+    <li><a href="../logout.php">Logout</a></li>
+</ul>
+
+</body>
+</html>

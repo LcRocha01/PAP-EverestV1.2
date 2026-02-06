@@ -65,3 +65,30 @@ $pedidos = $stmt->get_result();
 
 </body>
 </html>
+    <link rel="stylesheet" href="../assets/css/pedidos.css">
+</head>
+<body>
+
+<h2>Meus Pedidos</h2>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>ID</th>
+        <th>Data</th>
+        <th>Estado</th>
+    </tr>
+
+    <?php while ($p = $pedidos->fetch_assoc()): ?>
+    <tr>
+        <td>#<?php echo $p['id']; ?></td>
+        <td><?php echo $p['data_pedido']; ?></td>
+        <td><?php echo ucfirst($p['estado']); ?></td>
+    </tr>
+    <?php endwhile; ?>
+</table>
+
+<br>
+<a href="dashboard.php">Voltar</a>
+
+</body>
+</html>
